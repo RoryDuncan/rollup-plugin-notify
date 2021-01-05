@@ -200,7 +200,7 @@ function createTitle(sections) {
 module.exports = function notify(options = {}) {
 	return {
 		name: 'notify',
-		buildEnd(err) {
+		writeBundle(err) {
 			if (err)
 				notifyError(err, options.id)
 			else if (options && options.success === true)
