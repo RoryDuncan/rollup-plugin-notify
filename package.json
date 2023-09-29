@@ -5,7 +5,8 @@
   "author": "Mike Kovarik",
   "license": "MIT",
   "contributors": [
-    "Aria Stewart <aredridel@dinhe.net>"
+    "Aria Stewart <aredridel@dinhe.net>",
+    "Rory Duncan <rory@meow.coffee>"
   ],
   "type": "module",
   "main": "index.js",

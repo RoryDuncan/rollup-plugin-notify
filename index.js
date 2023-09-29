@@ -194,14 +194,26 @@ function createTitle(sections) {
   return sections.filter((a) => a).join(" ");
 }
 
+const defaultOptions = {
+  notifyOnError: true,
+  notifyOnSuccess: true,
+};
+
 export function notify(options = {}) {
+
+  const opts = {...defaultOptions, ...options,}
+
   return {
     name: "notify",
     buildEnd(err) {
-      if (err) notifyError(err, options.id);
+      if (opts.notifyOnError && err) {
+        notifyError(err, options.id);
+      }
     },
     generateBundle(options) {
-      notifySuccess(options.id);
+      if (opts.notifyOnSuccess) {
+        notifySuccess(options.id);
+      }
     },
   };
 }
