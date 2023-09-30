@@ -205,11 +205,13 @@ export function notify(options = {}) {
 
   return {
     name: "notify",
-    buildEnd(err) {
+    
+    renderError(err) {
       if (opts.notifyOnError && err) {
         notifyError(err, options.id);
       }
     },
+
     generateBundle(options) {
       if (opts.notifyOnSuccess) {
         notifySuccess(options.id);
