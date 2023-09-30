@@ -1,6 +1,6 @@
 {
   "name": "@roryduncan/rollup-plugin-notify",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "📟 Displays rollup builds and errors as system notifications.",
   "author": "Mike Kovarik",
   "license": "MIT",
