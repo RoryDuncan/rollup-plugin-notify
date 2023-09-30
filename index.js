@@ -18,30 +18,6 @@ if (VERSION) {
     );
 }
 
-// Ugly hack. There are two problems (not 100% sure but this is what's most likely going on)
-// 1) Rollup apparently terminates the process immediately after error occurs.
-//    It calls the buildEnd callback but does not give us enough time to create the notification asynchronously.
-// 2) node-notifier creates the notification by calling child_process.execFile() which is not as reliable
-//    as just child_process.exec(). But exec() wouldn't support multiline notifications due to inability to pass
-//    EOLs in cmd arguments.
-// This hack creates the notification synchronously and bypassess node-notifier's internals.
-// Tested on Windows 10. Not sure if the same problem/hack occurs/is-needed on other systems too.
-if (os.platform() === "win32" && os.release().startsWith("10.")) {
-  notifier.notify = function (options) {
-    var { title, message, icon } = options;
-    var cp = require("child_process");
-    var path = require("path");
-    var snorePath =
-      "./node_modules/node-notifier/vendor/snoreToast/SnoreToast.exe";
-    snorePath = path.join(__dirname, snorePath);
-    var args = [];
-    if (icon) args.push("-p", icon);
-    if (title) args.push("-t", title);
-    if (message) args.push("-m", message);
-    cp.spawnSync(snorePath, args);
-  };
-}
-
 var iconError = path.join(__dirname, "rollup-error.png");
 var iconSuccess = path.join(__dirname, "rollup-success.png");
 
